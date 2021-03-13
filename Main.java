@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 public class Main {
     public static AccountsInterface auth;
+    public static AdminInterface auth1;
 
     public static void main(String args[]) {
         // Admin admin = new Admin();
@@ -14,8 +15,29 @@ public class Main {
         // admin.addItem(item);
         // AccountsImplementation ai = new AccountsImplementation();
 
+        // try {
+        //     auth = (AccountsInterface) Naming.lookup("rmi://localhost:3000/Accounts");
+        //     // TODO code application logic here
+        // } catch (NotBoundException ex) {
+        //     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        // } catch (MalformedURLException ex) {
+        //     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        // } catch (RemoteException ex) {
+        //     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        // }
+
+        // Admin admin = new Admin("Ahmed", "Qaid", "701239");
+        // try {
+        //     System.out.println("aa");
+        //     System.out.println(auth.add(admin));
+
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+
+
         try {
-            auth = (AccountsInterface) Naming.lookup("rmi://localhost:8080/Accounts");
+            auth1 = (AdminInterface) Naming.lookup("rmi://localhost:3000/Items");
             // TODO code application logic here
         } catch (NotBoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
@@ -25,13 +47,14 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Admin admin = new Admin("Ahmed", "Qaid", "701239");
+        Item item = new Item("name33", 11, 123);
         try {
-            System.out.println("aa");
-            System.out.println(auth.add(admin));
-
+            System.out.println(auth1.addItem(item));
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        
+
     }
 }
