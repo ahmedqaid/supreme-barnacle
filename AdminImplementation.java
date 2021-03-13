@@ -35,8 +35,10 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             Container = (ArrayList<Item>) objectIn.readObject();
             for (int i = 0; i < Container.size(); i++) {
-                System.out.println(Container.get(i).id);
-                System.out.println(Container.get(i).name);
+                if (! Container.get(i).isDeleted) {
+                    System.out.println(Container.get(i).id);
+                    System.out.println(Container.get(i).name);
+                }
             }
             objectIn.close();
             fileIn.close();
@@ -65,6 +67,9 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
             
             itemList[i] = Container.get(i);
             if(itemList[i].id == id) {
+                if (itemList[i].isDeleted) {
+                    return "Item does not exist!";
+                }
                 Container.remove(i);
                 break;
             }
@@ -84,7 +89,10 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
             
             itemList[i] = Container.get(i);
             if(itemList[i].id == id) {
-                Container.remove(i);
+                if (itemList[i].isDeleted) {
+                    return "Item does not exist!";
+                }
+                Container.get(i).isDeleted = true;
                 break;
             }
         }

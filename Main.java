@@ -46,11 +46,11 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Item item = new Item("aaa", 22, 1123);
+        Item item = new Item("vvv", 22, 1123);
         try {
-            // System.out.println(auth1.addItem(item));
+            System.out.println(auth1.addItem(item));
             // System.out.println(auth1.modifyItem(item, 2));
-            System.out.println(auth1.deleteItem(1));
+            // System.out.println(auth1.deleteItem(1));
         } catch (Exception e) {
             e.printStackTrace();
         }

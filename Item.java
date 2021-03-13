@@ -5,6 +5,7 @@ public class Item implements Serializable {
     public String name;
     public double price;
     public int stock;
+    public boolean isDeleted = false;
 
     public Item (String name, double price, int stock) {
         this.name = name;
