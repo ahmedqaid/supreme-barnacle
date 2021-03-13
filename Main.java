@@ -16,25 +16,24 @@ public class Main {
         // AccountsImplementation ai = new AccountsImplementation();
 
         // try {
-        //     auth = (AccountsInterface) Naming.lookup("rmi://localhost:3000/Accounts");
-        //     // TODO code application logic here
+        // auth = (AccountsInterface) Naming.lookup("rmi://localhost:3000/Accounts");
+        // // TODO code application logic here
         // } catch (NotBoundException ex) {
-        //     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        // Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         // } catch (MalformedURLException ex) {
-        //     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        // Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         // } catch (RemoteException ex) {
-        //     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        // Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         // }
 
         // Admin admin = new Admin("Ahmed", "Qaid", "701239");
         // try {
-        //     System.out.println("aa");
-        //     System.out.println(auth.add(admin));
+        // System.out.println("aa");
+        // System.out.println(auth.add(admin));
 
         // } catch (Exception e) {
-        //     e.printStackTrace();
+        // e.printStackTrace();
         // }
-
 
         try {
             auth1 = (AdminInterface) Naming.lookup("rmi://localhost:3000/Items");
@@ -47,14 +46,14 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Item item = new Item("name33", 11, 123);
+        Item item = new Item("aaa", 22, 1123);
         try {
-            System.out.println(auth1.addItem(item));
+            // System.out.println(auth1.addItem(item));
+            // System.out.println(auth1.modifyItem(item, 2));
+            System.out.println(auth1.deleteItem(1));
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        
 
     }
 }

@@ -34,6 +34,10 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
             FileInputStream fileIn = new FileInputStream("items.txt");
             ObjectInputStream objectIn = new ObjectInputStream(fileIn);
             Container = (ArrayList<Item>) objectIn.readObject();
+            for (int i = 0; i < Container.size(); i++) {
+                System.out.println(Container.get(i).id);
+                System.out.println(Container.get(i).name);
+            }
             objectIn.close();
             fileIn.close();
         }
@@ -45,32 +49,33 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
 
     public String addItem(Item item) throws RemoteException {
         readFromFile();
+        item.id = Container.size();
         Container.add(item);
         writeToFile();
         return "Successfully added!";
     }
 
-    public String modifyItem(Item item) throws RemoteException {
+    public String modifyItem(Item item, int id) throws RemoteException {
         readFromFile();
         
+        item.id = id;
         Item[] itemList = new Item[Container.size()];
         
         for(int i = 0; i < Container.size(); i++) {
             
             itemList[i] = Container.get(i);
-            if(itemList[i] == item) {
+            if(itemList[i].id == id) {
                 Container.remove(i);
                 break;
             }
         }
-
         Container.add(item);
         writeToFile();
         
         return "Successfully modified!";
     }
 
-    public String deleteItem(Item item) throws RemoteException {
+    public String deleteItem(int id) throws RemoteException {
         readFromFile();
         
         Item[] itemList = new Item[Container.size()];
@@ -78,12 +83,11 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
         for(int i = 0; i < Container.size(); i++) {
             
             itemList[i] = Container.get(i);
-            if(itemList[i] == item) {
+            if(itemList[i].id == id) {
                 Container.remove(i);
                 break;
             }
         }
-
         writeToFile();
         
         return "Successfully deleted!";
