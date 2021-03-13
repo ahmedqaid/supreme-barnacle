@@ -8,6 +8,7 @@ public class Server {
             Registry registry = LocateRegistry.createRegistry(3000);
             registry.rebind("Accounts", new AccountsImplementation());
             registry.rebind("Items", new AdminImplementation());
+            registry.rebind("Sales", new SalesExecutiveImplementation());
         } catch(RemoteException ex) {
             ex.printStackTrace();
             System.out.println("Remote exception error, try changing ports!");

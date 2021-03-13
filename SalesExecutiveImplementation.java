@@ -1,0 +1,99 @@
+
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
+
+public class SalesExecutiveImplementation extends UnicastRemoteObject implements SalesExecutiveInterface, Serializable {
+    private ArrayList<Item> Container = new ArrayList<Item>();
+    private ArrayList<Receipt> receipts = new ArrayList<Receipt>();
+
+    public SalesExecutiveImplementation() throws RemoteException {
+
+    }
+
+    public void writeToFile() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("items.txt");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(Container);
+            fileOut.close();
+            objectOut.close();
+        }
+
+        catch (IOException e) {
+            System.out.println("Error with text file!");
+        }
+    }
+
+    public void readFromFile() {
+        try {
+            FileInputStream fileIn = new FileInputStream("items.txt");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            Container = (ArrayList<Item>) objectIn.readObject();
+            objectIn.close();
+            fileIn.close();
+        }
+
+        catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error with text file or class!");
+        }
+    }
+
+    public void makeOrder(ArrayList<Integer> itemIds) throws RemoteException {
+        readFromFile();
+        Item[] itemList = new Item[Container.size()];
+        double total = 0;
+
+        for (int i = 0; i < itemIds.size(); i++) {
+            for (int j = 0; j < Container.size(); j++) {
+                itemList[j] = Container.get(j);
+                if (itemList[i].id == itemIds.get(i)) {
+                    itemList[i].stock--;
+                    total += itemList[i].price;
+                    break;
+                }
+            }
+        }
+        writeToFile();
+        
+        Receipt receipt = new Receipt(itemIds, total);
+        readReceiptFromFile();
+        receipts.add(receipt);
+        writeReceiptToFile();
+    }
+
+    public void writeReceiptToFile() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("receipts.txt");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(receipts);
+            fileOut.close();
+            objectOut.close();
+        }
+
+        catch (IOException e) {
+            System.out.println("Error with text file!");
+        }
+    }
+
+    public void readReceiptFromFile() {
+        try {
+            FileInputStream fileIn = new FileInputStream("receipts.txt");
+            ObjectInputStream objectIn = new ObjectInputStream(fileIn);
+            receipts = (ArrayList<Receipt>) objectIn.readObject();
+            objectIn.close();
+            fileIn.close();
+        }
+
+        catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error with text file or class!");
+        }
+    }
+
+}
