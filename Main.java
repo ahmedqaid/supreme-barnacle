@@ -2,6 +2,7 @@ import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -46,14 +47,30 @@ public class Main {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        Item item = new Item("vvv", 22, 1123);
         try {
-            System.out.println(auth1.addItem(item));
-            // System.out.println(auth1.modifyItem(item, 2));
-            // System.out.println(auth1.deleteItem(1));
+            ArrayList<Item> ri = auth1.readItems();
+            for (int i = 0; i < ri.size(); i++) {
+                System.out.println(ri.get(i).id);
+                System.out.println(ri.get(i).name);
+                System.out.println(ri.get(i).price);
+                System.out.println(ri.get(i).stock);
+                System.out.println(ri.get(i).isDeleted);
+                System.out.println("-----------");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // Item item = new Item("vvv", 22, 1123);
+        // try {
+        //     System.out.println(auth1.addItem(item));
+        //     // System.out.println(auth1.modifyItem(item, 2));
+        //     // System.out.println(auth1.deleteItem(1));
+        // } catch (Exception e) {
+        //     e.printStackTrace();
+        // }
+
+
 
     }
 }

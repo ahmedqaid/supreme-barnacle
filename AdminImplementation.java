@@ -102,4 +102,8 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
 
     }
 
+    public ArrayList<Item> readItems() throws RemoteException {
+        readFromFile();
+        return Container;
+    }
 }
