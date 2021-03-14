@@ -5,4 +5,5 @@ import java.util.ArrayList;
 
 public interface SalesExecutiveInterface extends Remote {
     public void makeOrder(ArrayList<Integer> itemIds) throws RemoteException;
+    public ArrayList<Receipt> geReceipts() throws RemoteException;
 }

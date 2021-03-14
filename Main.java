@@ -48,6 +48,7 @@ public class Main {
         }
 
         try {
+            System.out.println(auth1.deleteItem(3));
             ArrayList<Item> ri = auth1.readItems();
             for (int i = 0; i < ri.size(); i++) {
                 System.out.println(ri.get(i).id);
