@@ -142,14 +142,15 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
                     if (quantities.get(siz) > itemList[i].stock) {
                         break;
                     }
-                    itemList[i].stock -= quantities.get(siz);
+                    Container.get(i).stock -= quantities.get(siz);
+                    // itemList[i].stock -= quantities.get(siz);
                     successfulIds.add(itemList[i].id);
                     break;
                 }
             }
             
         }
-
+        writeToFile();
         return "success";
     }
 }
