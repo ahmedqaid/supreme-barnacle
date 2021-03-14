@@ -124,5 +124,32 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
             return -1;
         }
         return item.price * quantity;
-    }   
+    }
+
+    public String decreaseStock(ArrayList<Integer> itemIds, ArrayList<Integer> quantities) throws RemoteException {
+        ArrayList<Integer> successfulIds = new ArrayList<Integer>();
+        readFromFile();
+
+        for (int siz = 0; siz < itemIds.size(); siz++) {
+            Item[] itemList = new Item[Container.size()];
+            for(int i = 0; i < itemIds.size(); i++) {
+                
+                itemList[i] = Container.get(i);
+                if(itemList[i].id == itemIds.get(siz)) {
+                    if (itemList[i].isDeleted) {
+                        break;
+                    }
+                    if (quantities.get(siz) > itemList[i].stock) {
+                        break;
+                    }
+                    itemList[i].stock -= quantities.get(siz);
+                    successfulIds.add(itemList[i].id);
+                    break;
+                }
+            }
+            
+        }
+
+        return "success";
+    }
 }
