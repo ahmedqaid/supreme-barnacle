@@ -12,8 +12,9 @@ public class Tests {
     public static SalesExecutiveInterface salesExecutiveInterface;
 
     public static void main(String args[]) {
+        String path = "rmi://localhost:" + Server.port;
         try {
-            accountsInterface = (AccountsInterface) Naming.lookup("rmi://localhost:3000/Accounts");
+            accountsInterface = (AccountsInterface) Naming.lookup(path + "/Accounts");
         } catch (NotBoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -22,13 +23,13 @@ public class Tests {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (accountsInterface != null) {
-            System.out.println("#1: rmi://localhost:3000/Accounts - SUCCESS");
+            System.out.println("#1: " + path + "/Accounts - SUCCESS");
         } else {
-            System.out.println("#1: rmi://localhost:3000/Accounts - FAILURE");
+            System.out.println("#1: " + path + "/Accounts - FAILURE");
         }
 
         try {
-            adminInterface = (AdminInterface) Naming.lookup("rmi://localhost:3000/Items");
+            adminInterface = (AdminInterface) Naming.lookup(path + "/Items");
         } catch (NotBoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -37,13 +38,13 @@ public class Tests {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (adminInterface != null) {
-            System.out.println("#2: rmi://localhost:3000/Items - SUCCESS");
+            System.out.println("#2: " + path + "/Items - SUCCESS");
         } else {
-            System.out.println("#2: rmi://localhost:3000/Items - FAILURE");
+            System.out.println("#2: " + path + "/Items - FAILURE");
         }
 
         try {
-            salesExecutiveInterface = (SalesExecutiveInterface) Naming.lookup("rmi://localhost:3000/Sales");
+            salesExecutiveInterface = (SalesExecutiveInterface) Naming.lookup(path + "/Sales");
         } catch (NotBoundException ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         } catch (MalformedURLException ex) {
@@ -52,9 +53,9 @@ public class Tests {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (salesExecutiveInterface != null) {
-            System.out.println("#3: rmi://localhost:3000/Sales - SUCCESS");
+            System.out.println("#3: " + path + "/Sales - SUCCESS");
         } else {
-            System.out.println("#3: rmi://localhost:3000/Sales - FAILURE");
+            System.out.println("#3: " + path + "/Sales - FAILURE");
         }
 
     }
