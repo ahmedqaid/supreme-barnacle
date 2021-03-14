@@ -96,7 +96,7 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
         }
     }
 
-    public ArrayList<Receipt> geReceipts() throws RemoteException {
+    public ArrayList<Receipt> getReceipts() throws RemoteException {
         readReceiptFromFile();
         return receipts;
     }
