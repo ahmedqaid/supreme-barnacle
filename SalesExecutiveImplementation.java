@@ -126,7 +126,7 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
         return item.price * quantity;
     }
 
-    public String decreaseStock(ArrayList<Integer> itemIds, ArrayList<Integer> quantities) throws RemoteException {
+    public ArrayList<Integer> decreaseStock(ArrayList<Integer> itemIds, ArrayList<Integer> quantities) throws RemoteException {
         ArrayList<Integer> successfulIds = new ArrayList<Integer>();
         readFromFile();
 
@@ -151,6 +151,6 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
             
         }
         writeToFile();
-        return "success";
+        return successfulIds;
     }
 }
