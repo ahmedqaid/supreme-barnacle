@@ -120,6 +120,9 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
 
     public double calculatePrice(int itemId, int quantity) throws RemoteException {
         Item item = findItem(itemId);
+        if (quantity > item.stock) {
+            return -1;
+        }
         return item.price * quantity;
-    }
+    }   
 }
