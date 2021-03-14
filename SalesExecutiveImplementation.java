@@ -132,7 +132,7 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
 
         for (int siz = 0; siz < itemIds.size(); siz++) {
             Item[] itemList = new Item[Container.size()];
-            for(int i = 0; i < itemIds.size(); i++) {
+            for(int i = 0; i < Container.size(); i++) {
                 
                 itemList[i] = Container.get(i);
                 if(itemList[i].id == itemIds.get(siz)) {
