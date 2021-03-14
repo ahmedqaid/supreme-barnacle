@@ -101,4 +101,25 @@ public class SalesExecutiveImplementation extends UnicastRemoteObject implements
         return receipts;
     }
 
+    public Item findItem(int itemId) {
+        readFromFile();
+        
+        Item[] itemList = new Item[Container.size()];
+        for(int i = 0; i < Container.size(); i++) {
+            
+            itemList[i] = Container.get(i);
+            if(itemList[i].id == itemId) {
+                if (itemList[i].isDeleted) {
+                    break;
+                }
+                return itemList[i];
+            }
+        }
+        return null;
+    }
+
+    public double calculatePrice(int itemId, int quantity) throws RemoteException {
+        Item item = findItem(itemId);
+        return item.price * quantity;
+    }
 }
