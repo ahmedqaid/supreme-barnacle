@@ -104,6 +104,13 @@ public class AdminImplementation extends UnicastRemoteObject implements AdminInt
 
     public ArrayList<Item> readItems() throws RemoteException {
         readFromFile();
-        return Container;
+        ArrayList<Item> items = new ArrayList<Item>();
+        for (int i = 0; i < Container.size(); i++) {
+            Item item = Container.get(i);
+            if (! item.isDeleted) {
+                items.add(item);
+            }
+        }
+        return items;
     }
 }
